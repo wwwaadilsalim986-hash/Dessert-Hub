@@ -27,9 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-%a7rh)o%l99n$q3!pd$s-#lylm_2)=r0=z%c%s)7a=f#3=g0$m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['Dessertthub.pythonanywhere.com']
+ALLOWED_HOSTS = ['yournewusername.pythonanywhere.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -133,6 +133,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
