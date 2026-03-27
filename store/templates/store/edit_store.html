@@ -1,0 +1,238 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Edit Store — DessertHub{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/accounts/become_baker.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="become-wrapper">
+    <div class="become-card">
+
+        <!-- Header -->
+        <div class="become-header">
+            <h2 class="become-title">Edit Your Store 🍰</h2>
+            <p class="become-subtitle">Update your store information on DessertHub</p>
+        </div>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- ── Section 1: Store Info ── -->
+            <div class="form-section">
+                <h5 class="section-heading">
+                    <i class="bi bi-shop me-2"></i>Store Information
+                </h5>
+
+                <!-- Store Name -->
+                <div class="mb-3">
+                    <label class="form-label auth-label">Store Name <span class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-text auth-input-icon"><i class="bi bi-shop"></i></span>
+                        <input type="text" name="store_name" class="form-control auth-input"
+                               placeholder="e.g. Ammu's Bakery"
+                               value="{{ baker.store_name }}" required>
+                    </div>
+                </div>
+
+                <!-- Phone -->
+                <div class="mb-3">
+                    <label class="form-label auth-label">Phone Number</label>
+                    <div class="input-group">
+                        <span class="input-group-text auth-input-icon"><i class="bi bi-telephone"></i></span>
+                        <input type="text" name="phone" class="form-control auth-input"
+                               placeholder="e.g. 9876543210"
+                               value="{{ baker.phone|default:'' }}">
+                    </div>
+                </div>
+
+                <!-- City + State -->
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label auth-label">City</label>
+                        <div class="input-group">
+                            <span class="input-group-text auth-input-icon"><i class="bi bi-geo-alt"></i></span>
+                            <input type="text" name="city" class="form-control auth-input"
+                                   placeholder="e.g. Kochi"
+                                   value="{{ baker.city|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label auth-label">State</label>
+                        <div class="input-group">
+                            <span class="input-group-text auth-input-icon"><i class="bi bi-map"></i></span>
+                            <input type="text" name="state" class="form-control auth-input"
+                                   placeholder="e.g. Kerala"
+                                   value="{{ baker.state|default:'' }}">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business Type + Experience -->
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label auth-label">Business Type</label>
+                        <select name="business_type" class="form-select auth-input">
+                            <option value="">-- Select --</option>
+                            <option value="home_baker" {% if baker.business_type == 'home_baker' %}selected{% endif %}>Home Baker</option>
+                            <option value="bakery" {% if baker.business_type == 'bakery' %}selected{% endif %}>Bakery</option>
+                            <option value="cloud_kitchen" {% if baker.business_type == 'cloud_kitchen' %}selected{% endif %}>Cloud Kitchen</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label auth-label">Years of Experience</label>
+                        <div class="input-group">
+                            <span class="input-group-text auth-input-icon"><i class="bi bi-calendar"></i></span>
+                            <input type="number" name="years_of_experience" class="form-control auth-input"
+                                   placeholder="e.g. 3" min="0" max="50"
+                                   value="{{ baker.years_of_experience|default:'' }}">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Picture -->
+                <div class="mb-3">
+                    <label class="form-label auth-label">Profile Picture</label>
+                    {% if baker.profile_pic %}
+                        <div class="current-file">
+                            <small class="hint-text">Upload new Profile picture to replace.</small>
+                        </div>
+                    {% endif %}
+                    <input type="file" name="profile_pic" class="form-control auth-input" accept="image/*">
+                </div>
+
+                <!-- Description -->
+                <div class="mb-3">
+                    <label class="form-label auth-label">Store Description</label>
+                    <textarea name="description" class="form-control auth-input"
+                              rows="4"
+                              placeholder="Tell customers about your store...">{{ baker.description|default:'' }}</textarea>
+                </div>
+
+                <!-- Banner -->
+                <div class="mb-3">
+                    <label class="form-label auth-label">Store Banner <span class="optional-tag">(Optional)</span></label>
+                    {% if baker.banner %}
+                        <div class="current-file">
+                            <small class="hint-text"> Upload new banner to replace.</small>
+                        </div>
+                    {% endif %}
+                    <input type="file" name="banner" class="form-control auth-input" accept="image/*">
+                    <small class="hint-text">Recommended size: 1200x300px</small>
+                </div>
+
+                <!-- Accepts Custom Orders -->
+                <div class="mb-3">
+                    <div class="custom-toggle">
+                        <input type="checkbox" name="accepts_custom_orders"
+                               id="customOrders" class="toggle-input"
+                               {% if baker.accepts_custom_orders %}checked{% endif %}>
+                        <label for="customOrders" class="toggle-label">
+                            <span class="toggle-switch"></span>
+                            I accept custom orders
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Section 2: Legal Info ── -->
+            <div class="form-section">
+                <h5 class="section-heading">
+                    <i class="bi bi-file-earmark-text me-2"></i>Legal Information
+                </h5>
+
+                <!-- FSSAI -->
+                <div class="mb-3">
+                    <label class="form-label auth-label">FSSAI License Number</label>
+                    <div class="input-group">
+                        <span class="input-group-text auth-input-icon"><i class="bi bi-card-text"></i></span>
+                        <input type="text" name="fssai_number" class="form-control auth-input"
+                               placeholder="14 digit FSSAI number"
+                               value="{{ baker.fssai_number|default:'' }}">
+                    </div>
+                </div>
+
+                <!-- FSSAI Document -->
+                <div class="mb-3">
+                    <label class="form-label auth-label">FSSAI Certificate</label>
+                    {% if baker.fssai_document %}
+                        <small class="hint-text d-block mb-1">
+                            <i class="bi bi-file-check me-1"></i>Document already uploaded. Upload new to replace.
+                        </small>
+                    {% endif %}
+                    <input type="file" name="fssai_document" class="form-control auth-input" accept="image/*,.pdf">
+                </div>
+
+                <!-- GST -->
+                <div class="mb-3">
+                    <label class="form-label auth-label">GST Number <span class="optional-tag">(Optional)</span></label>
+                    <div class="input-group">
+                        <span class="input-group-text auth-input-icon"><i class="bi bi-receipt"></i></span>
+                        <input type="text" name="gst_number" class="form-control auth-input"
+                               placeholder="15 digit GST number"
+                               value="{{ baker.gst_number|default:'' }}">
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Section 3: Aadhaar ── -->
+            <div class="form-section">
+                <h5 class="section-heading">
+                    <i class="bi bi-shield-check me-2"></i>Aadhaar Verification
+                </h5>
+                <p class="section-desc">Your Aadhaar details are encrypted and used only for identity verification.</p>
+
+                <!-- Aadhaar Number -->
+                <div class="mb-3">
+                    <label class="form-label auth-label">Aadhaar Number</label>
+                    <div class="input-group">
+                        <span class="input-group-text auth-input-icon"><i class="bi bi-person-vcard"></i></span>
+                        <input type="text" name="aadhaar_number" class="form-control auth-input"
+                               placeholder="12 digit Aadhaar number"
+                               maxlength="12"
+                               value="{{ baker.aadhaar_number|default:'' }}">
+                    </div>
+                </div>
+
+                <!-- Aadhaar Front + Back -->
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label auth-label">Aadhaar Front</label>
+                        {% if baker.aadhaar_front %}
+                            <small class="hint-text d-block mb-1">
+                                <i class="bi bi-file-check me-1"></i>Already uploaded. Upload new to replace.
+                            </small>
+                        {% endif %}
+                        <input type="file" name="aadhaar_front" class="form-control auth-input" accept="image/*">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label auth-label">Aadhaar Back</label>
+                        {% if baker.aadhaar_back %}
+                            <small class="hint-text d-block mb-1">
+                                <i class="bi bi-file-check me-1"></i>Already uploaded. Upload new to replace.
+                            </small>
+                        {% endif %}
+                        <input type="file" name="aadhaar_back" class="form-control auth-input" accept="image/*">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit + Cancel -->
+            <button type="submit" class="auth-btn w-100">
+                <i class="bi bi-check2-circle me-2"></i>Save Changes
+            </button>
+
+        </form>
+
+        <!-- Cancel link -->
+        <p class="text-center mt-3">
+            <a href="/my-store/{{ request.user.baker_profile.id }}/" class="auth-link">
+                ← Cancel, go back to My Store
+            </a>
+        </p>
+
+    </div>
+</div>
+{% endblock %}

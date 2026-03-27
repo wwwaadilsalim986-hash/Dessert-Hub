@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ request.user.username }} — DessertHub{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/accounts/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row g-4">
+
+        <!-- ── Left: Profile Card ── -->
+        <div class="col-lg-4">
+            <div class="profile-card">
+
+                <!-- Profile Picture -->
+                <div class="profile-pic-wrapper">
+                    {% if request.user.profile.profile_pic %}
+                        <img src="{{ request.user.profile.profile_pic.url }}"
+                             alt="Profile"
+                             class="profile-pic">
+                    {% else %}
+                        <img src="{% static 'images/accounts/default_profile.png' %}"
+                             alt="Profile"
+                             class="profile-pic">
+                    {% endif %}
+                </div>
+
+                <!-- User Info -->
+                <h4 class="profile-username">{{ request.user.username }}</h4>
+                <p class="profile-email">
+                    <i class="bi bi-envelope me-1"></i>{{ request.user.email }}
+                </p>
+
+                {% if request.user.profile.phone %}
+                <p class="profile-phone">
+                    <i class="bi bi-telephone me-1"></i>{{ request.user.user_profile.phone }}
+                </p>
+                {% endif %}
+
+                <!-- Role Badge -->
+                {% if request.user.user_profile.role == 'baker' %}
+                    <span class="role-badge baker">🍰 Baker</span>
+                {% else %}
+                    <span class="role-badge customer">🛍 Customer</span>
+                {% endif %}
+
+                <!-- Edit Button -->
+                <a href="/edit-profile/" class="btn-edit-profile mt-3">
+                    <i class="bi bi-pencil me-1"></i>Edit Profile
+                </a>
+
+                <a href="/logout/" class="btn-edit-profile mt-3">
+                    <i class="bi bi-box-arrow-right me-1"></i>Logout
+                </a>
+
+            </div>
+        </div>
+
+        <!-- ── Right Column ── -->
+        <div class="col-lg-8">          <!-- ← this was missing -->
+
+            <div class="become-baker-card">
+                <div class="profile-pic-wrapper">
+                    <img src="{% static 'images/accounts/baker-dp.png' %}"
+                             alt="Profile"
+                             class="profile-pic">
+                </div>
+                <h4 class="become-title">Become a Baker</h4>
+                <h5 class="become-desc">Start selling your desserts on DessertHub and reach thousands of customers.</h5>
+                <a href="/become-baker/" class="btn-become-baker">
+                    Become a Seller →
+                </a>
+            </div>
+
+        </div>                       
+
+    </div>
+</div>
+{% endblock %}

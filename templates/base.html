@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title> {% block title %} Dessert Hub {% endblock %} </title>
+
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Base CSS -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+    {% block style %}  {% endblock %} 
+
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg main-navbar">
+    <div class="container">
+        <a class="navbar-brand brand-logo" href="/"> <img class="brand-logo" src="{% static 'images/store/logo.png' %}" alt=""></a>
+        <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon "></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+
+                {% if request.user.is_authenticated %}
+                                       
+                    {% if request.user.is_superuser %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin-panel/">Admin Panel</a>
+                        </li>
+                    {% endif %}
+
+                    <li class="nav-item">
+                            <a class="nav-link" href="/my-orders/">Orders</a>
+                    </li>
+
+                    {% if request.user.profile.role == 'baker' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/my-store/{{ request.user.baker_profile.id }}/">My store</a>
+                        </li>
+
+                    {% else %}
+                    <li class="nav-item">
+                                <a class="nav-link" href="/profile/">Profile</a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard/">Dashboard</a>
+                    </li>                    
+
+
+                {% else %}
+                    <li class="nav-item">
+                            <a class="nav-link " href="/login/">Login</a>
+                    </li>
+
+                    <li class="nav-item">
+                            <a class="nav-link nav-register-btn" href="/register/">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+    
+{% if messages %}
+<div class="container mt-3">
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<main class="main-content">
+    {% block content %}{% endblock %}
+</main>
+
+
+<!-- Footer -->
+<footer class="main-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <h5 class="footer-brand">🍰 DessertHub</h5>
+                <p class="footer-text">A sweet marketplace connecting passionate bakers with dessert lovers.</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <h5 class="footer-heading">Quick Links</h5>
+                <ul class="footer-links">
+                    <li><a href="/">Home</a></li>
+                    {% if request.user.is_authenticated %}
+                        {% if request.user.profile.role == 'baker' %}
+                            <li><a href="/my-store/{{ request.user.baker_profile.id }}/">My Store</a></li>
+                        {% else %}
+                            <li><a href="/become-baker/">Become a Seller</a></li>
+                        {% endif %}
+                    {% else %}
+                        <li><a href="/become-baker/">Become a Seller</a></li>
+                    {% endif %}
+            </div>
+            <div class="col-md-4 mb-4">
+                <h5 class="footer-heading">Contact</h5>
+                <p class="footer-text"><i class="bi bi-envelope me-2"></i>hello@desserthub.com</p>
+                <p class="footer-text"><i class="bi bi-telephone me-2"></i>+91 98765 43210</p>
+                <p class="footer-text"><i class="bi bi-geo-alt me-2"></i>Kerala, India</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 DessertHub. All rights reserved. </p>
+        </div>
+    </div>
+</footer>
+
+
+<!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+{% block scripts %}  {% endblock %}
+</body>
+</html>

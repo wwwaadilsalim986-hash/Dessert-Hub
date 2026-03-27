@@ -1,0 +1,301 @@
+/* ─── Page Wrapper ───────────────────────── */
+.product-form-wrapper {
+    min-height: 80vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 16px;
+}
+
+/* ─── Card ───────────────────────────────── */
+.product-form-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 40px 36px;
+    box-shadow: 0 4px 24px rgba(30,10,0,0.10);
+    width: 100%;
+    max-width: 800px;
+    border-top: 4px solid var(--accent);
+}
+
+/* ─── Header ─────────────────────────────── */
+.product-form-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+.product-form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 6px;
+}
+.product-form-subtitle {
+    font-size: 0.88rem;
+    color: var(--muted);
+}
+
+/* ─── Labels ─────────────────────────────── */
+.pf-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    display: block;
+}
+.pf-hint {
+    font-size: 0.76rem;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 10px;
+}
+.pf-image-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 4px;
+    display: block;
+}
+
+/* ─── Inputs ─────────────────────────────── */
+.pf-input {
+    background: var(--secondary);
+    border: 1px solid rgba(62,28,0,0.15);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.92rem;
+    color: var(--dark);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.pf-input:focus {
+    background: #ffffff;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(232,121,58,0.12);
+    outline: none;
+}
+.pf-input::placeholder {
+    color: #b89880;
+    font-size: 0.88rem;
+}
+
+/* ─── Input Group ────────────────────────── */
+.pf-icon {
+    background: var(--secondary);
+    border: 1px solid rgba(62,28,0,0.15);
+    border-right: none;
+    border-radius: 10px 0 0 10px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    padding: 10px 12px;
+}
+.input-group .pf-input {
+    border-left: none;
+    border-radius: 0 10px 10px 0;
+}
+.input-group .pf-input:focus {
+    border-color: var(--accent);
+    box-shadow: none;
+}
+.input-group:focus-within .pf-icon {
+    border-color: var(--accent);
+}
+
+/* ─── Textarea ───────────────────────────── */
+.pf-textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.6;
+}
+
+/* ─── Image Input Row ────────────────────── */
+.image-input-row {
+    margin-bottom: 10px;
+}
+input[type="file"].pf-input {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+input[type="file"].pf-input::file-selector-button {
+    background: var(--accent);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 4px 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background 0.2s;
+}
+input[type="file"].pf-input::file-selector-button:hover {
+    background: #cf6428;
+}
+
+/* ─── Toggle ─────────────────────────────── */
+.custom-toggle { display: flex; align-items: center; }
+.toggle-input  { display: none; }
+.toggle-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    color: var(--dark);
+    font-weight: 500;
+}
+.toggle-switch {
+    width: 44px;
+    height: 24px;
+    background: #d4c4b8;
+    border-radius: 12px;
+    position: relative;
+    transition: background 0.2s;
+    flex-shrink: 0;
+}
+.toggle-switch::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: #ffffff;
+    border-radius: 50%;
+    top: 3px;
+    left: 3px;
+    transition: left 0.2s;
+}
+.toggle-input:checked + .toggle-label .toggle-switch {
+    background: var(--accent);
+}
+.toggle-input:checked + .toggle-label .toggle-switch::after {
+    left: 23px;
+}
+
+/* ─── Error ──────────────────────────────── */
+.pf-error {
+    font-size: 0.8rem;
+    color: #a03030;
+    margin-top: 4px;
+    margin-bottom: 0;
+}
+
+/* ─── Submit Button ──────────────────────── */
+.pf-btn {
+    display: block;
+    width: 100%;
+    background: var(--grad);
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 13px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.15s;
+    letter-spacing: 0.3px;
+}
+.pf-btn:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
+}
+
+/* ─── Cancel Link ────────────────────────── */
+.pf-link {
+    color: var(--accent);
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.pf-link:hover { color: var(--primary); }
+
+/* ─── Mobile ─────────────────────────────── */
+@media (max-width: 768px) {
+    .product-form-card {
+        padding: 24px 16px;
+        border-radius: 16px;
+    }
+    .product-form-title { font-size: 1.4rem; }
+}
+
+
+/* ─── Current Images Grid ────────────────── */
+.current-images-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.current-img-item {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+}
+
+.current-img-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    transition: border 0.2s, opacity 0.2s;
+}
+
+/* ─── Delete Checkbox ────────────────────── */
+.delete-checkbox { display: none; }
+
+.delete-label {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: rgba(160, 48, 48, 0.85);
+    color: #fff;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.current-img-item:hover .delete-label {
+    opacity: 1;                 /* shows on hover */
+}
+
+.delete-checkbox:checked + .delete-label {
+    opacity: 1;
+    background: #a03030;        /* stays red when checked */
+}
+
+.delete-checkbox:checked ~ .current-img-thumb,
+.current-img-item:has(.delete-checkbox:checked) .current-img-thumb {
+    border-color: #a03030;      /* red border when marked for delete */
+    opacity: 0.5;               /* fades out when marked */
+}
+
+/* ─── Delete Product Button ──────────────── */
+.pf-btn-delete {
+    display: block;
+    width: 100%;
+    background: transparent;
+    border: 2px solid #a03030;
+    color: #a03030;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    letter-spacing: 0.3px;
+}
+.pf-btn-delete:hover {
+    background: #a03030;
+    color: #fff;
+}

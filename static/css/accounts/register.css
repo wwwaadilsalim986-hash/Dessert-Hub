@@ -1,0 +1,115 @@
+/* ─── Auth Wrapper ───────────────────────── */
+.auth-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 75vh;
+    padding: 30px 20px;
+}
+
+/* ─── Logo ───────────────────────────────── */
+.auth-logo {
+    min-width: 200px;
+    max-width: 15%;
+    margin-bottom: 20px;
+}
+
+/* ─── Card ───────────────────────────────── */
+.auth-card {
+    width: 100%;
+    max-width: 500px;
+    padding: 36px;
+    border-radius: 20px !important;
+    border: none !important;
+    border-top: 4px solid var(--accent) !important;
+}
+
+/* ─── Title ──────────────────────────────── */
+.auth-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--primary);
+    margin-bottom: 4px;
+    text-align: center;
+}
+
+.auth-subtitle {
+    font-size: 0.88rem;
+    color: var(--muted);
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+/* ─── Labels ─────────────────────────────── */
+.form-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--primary);
+    margin-bottom: 6px;
+}
+
+/* ─── Inputs ─────────────────────────────── */
+.auth-input {
+    background: var(--secondary) !important;
+    border: 1.5px solid #e0cfc8 !important;
+    border-radius: 10px !important;
+    font-size: 0.92rem;
+    padding: 10px 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.auth-input:focus {
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 3px rgba(232, 121, 58, 0.12) !important;
+    background: #ffffff !important;
+}
+
+/* ─── Submit Button ──────────────────────── */
+.btn-auth {
+    background: var(--primary);
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    padding: 12px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    width: 100%;
+    transition: background-color 0.2s, transform 0.15s;
+    cursor: pointer;
+}
+
+.btn-auth:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+}
+
+/* ─── Bottom link ────────────────────────── */
+.auth-bottom-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.88rem;
+    color: var(--muted);
+}
+
+.auth-bottom-link a {
+    color: var(--accent);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.auth-bottom-link a:hover {
+    color: var(--primary);
+}
+
+/* ─── Responsive ─────────────────────────── */
+@media (max-width: 576px) {
+    .auth-card {
+        padding: 24px 18px;
+    }
+    .role-selector {
+        flex-direction: column;
+    }
+}

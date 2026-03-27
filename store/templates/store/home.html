@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+  <link rel="stylesheet" href="{% static 'css/store/home.css' %}">
+{% endblock %}
+{% static 'images/store/cursol_cookie.png' %}
+
+{% block content %}
+
+
+<div class="carousel-wrapper">
+  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{% static 'images/store/banner.png' %}" class="d-block w-100" alt="Banner 1">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/store/banner.png' %}" class="d-block w-100" alt="Banner 2">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<!-- Categories -->
+
+<div class="container mt-5">
+    <h2 class="section-title">Shop by Category</h2>
+        <div class="category-row mt-3">
+            {% for category in categories %}
+            <div class="category-item">
+                <a href="/category/{{ category.id }}/" class="category-link">
+                    <div class="category-circle">
+                        {% if category.image %}
+                            <img src="{{ category.image.url }}" alt="{{ category.name }}">
+                        {% else %}
+                            <img src="{% static 'images/store/default_category.png' %}" alt="{{ category.name }}">
+                        {% endif %}
+                    </div>
+                    <span class="category-label">{{ category.name }}</span>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+</div>
+
+
+
+
+<!-- Products Section -->
+<div class="container mt-5 title-sec " id="products">
+    <div class="d-flex justify-content-between align-items-center">
+        <h2 class="section-title mb-5">Fresh From Our Bakers</h2>
+        <a href="/all-products/" class="view-all mb-5">View All <i class="bi bi-arrow-right"></i></a>
+    </div>
+
+
+<div class="row row-cols-2 row-cols-md-2 row-cols-lg-4 g-4">
+  {% for product in products %}
+  <div class="col">
+      <a href="/product_detail/{{ product.id }}/" class="product-card-link">
+          <div class="product-card">
+              {% with product.images.first as main_image %}
+                  {% if main_image %}
+                      <img src="{{ main_image.image.url }}" alt="{{ product.name }}" class="product-img">
+                  {% else %}
+                      <img src="{% static 'images/store/default_product.png' %}" alt="{{ product.name }}" class="product-img">
+                  {% endif %}
+              {% endwith %}
+              <span class="product-badge">{{ product.category }}</span>
+              <div class="product-body">
+                  <h5 class="product-name">{{ product.name }}</h5>
+                  <p class="product-baker"><i class="bi bi-shop me-1"></i>{{ product.baker }}</p>
+                  <div class="product-footer">
+                      <span class="product-price">₹ {{ product.price }}</span>
+                      <span class="btn-order">View Details</span>
+                  </div>
+              </div>
+          </div>
+      </a>
+  </div>
+  {% endfor %}
+</div>
+    
+
+<!-- Spacer -->
+<div class="mb-5"></div>
+
+{% endblock %}

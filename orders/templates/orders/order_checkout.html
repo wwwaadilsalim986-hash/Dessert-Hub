@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Delivery Details — DessertHub{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/accounts/become_baker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/orders/orders.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="become-wrapper">
+    <div class="become-card">
+
+        <!-- Header -->
+        <div class="become-header">
+            <h2 class="become-title">Delivery Details 📦</h2>
+            <p class="become-subtitle">Step 2 of 2 — Where should we deliver?</p>
+        </div>
+        
+        <!-- Order Summary -->
+        <div class="form-section">
+            <h5 class="section-heading">
+                <i class="bi bi-receipt me-2"></i>Order Summary
+            </h5>
+            <div class="order-summary-row">
+                <span class="order-summary-label">{{ product.name }} × {{ quantity }}</span>
+                <span class="order-summary-total">₹ {{ total_price }}</span>
+            </div>
+            <div class="order-summary-row">
+                <span class="order-summary-label">Payment Method</span>
+                <span class="order-payment-badge">
+                    <i class="bi bi-cash-coin me-1"></i>Cash on Delivery
+                </span>
+            </div>
+        </div>
+
+        <!-- Delivery Form -->
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-section">
+                <h5 class="section-heading">
+                    <i class="bi bi-geo-alt me-2"></i>Delivery Information
+                </h5>
+
+                <div class="mb-3">
+                    <label class="form-label auth-label">Full Name</label>
+                    {{ form.delivery_name }}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label auth-label">Phone Number</label>
+                    {{ form.delivery_phone }}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label auth-label">Address</label>
+                    {{ form.delivery_address }}
+                </div>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label auth-label">City</label>
+                        {{ form.delivery_city }}
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label auth-label">State</label>
+                        {{ form.delivery_state }}
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label auth-label">Pincode</label>
+                    {{ form.delivery_pincode }}
+                </div>
+            </div>
+
+            <button type="submit" class="auth-btn w-100">
+                <i class="bi bi-bag-check me-2"></i>Place Order — ₹ {{ total_price }}
+            </button>
+        </form>
+
+        <p class="text-center mt-3">
+            <a href="/order/{{ product.id }}/" class="auth-link">← Back</a>
+        </p>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Order Placed — DessertHub{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/accounts/become_baker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/orders/orders.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="become-wrapper">
+    <div class="become-card success-wrapper">
+
+        <!-- Success Icon -->
+        <span class="success-emoji">🎉</span>
+        <h2 class="become-title">Order Placed!</h2>
+        <p class="become-subtitle">Your order is confirmed. The baker will process it soon.</p>
+
+        <!-- Order Details -->
+        <div class="form-section" style="text-align: left;">
+            <h5 class="section-heading">
+                <i class="bi bi-receipt me-2"></i>Order Details
+            </h5>
+
+            <div class="success-detail-row">
+                <span class="success-detail-label">Order ID</span>
+                <span class="success-detail-value primary">#{{ order.id }}</span>
+            </div>
+            <div class="success-detail-row">
+                <span class="success-detail-label">Product</span>
+                <span class="success-detail-value">{{ order.product.name }}</span>
+            </div>
+            <div class="success-detail-row">
+                <span class="success-detail-label">Quantity</span>
+                <span class="success-detail-value">{{ order.quantity }}</span>
+            </div>
+            <div class="success-detail-row">
+                <span class="success-detail-label">Total</span>
+                <span class="success-detail-value primary">₹ {{ order.total_price }}</span>
+            </div>
+            <div class="success-detail-row">
+                <span class="success-detail-label">Payment</span>
+                <span class="success-payment">Cash on Delivery</span>
+            </div>
+            <div class="success-detail-row">
+                <span class="success-detail-label">Deliver to</span>
+                <span class="success-detail-value">{{ order.delivery_city }}, {{ order.delivery_state }}</span>
+            </div>
+            <div class="success-detail-row">
+                <span class="success-detail-label">Status</span>
+                <span class="success-status">⏳ Pending</span>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="success-actions">
+            <a href="/my-orders/" class="auth-btn" style="text-decoration: none; padding: 10px 28px; display: inline-block; width: auto;">
+                View My Orders
+            </a>
+            <a href="/" class="btn-continue-shopping">Continue Shopping</a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

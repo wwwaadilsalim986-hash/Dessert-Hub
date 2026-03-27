@@ -1,0 +1,214 @@
+:root {
+    --primary:    #5C3D2E;
+    --secondary:  #FFF8F0;
+    --accent:     #c76e3a;
+    --dark:       #1A0A00;
+    --bg:         #FFF8F0;
+    --muted:      #9C7B6B;
+    --card-bg:    #FFFFFF;
+    --card-shadow: 0 4px 20px rgba(92, 61, 46, 0.10);
+    --grad:       linear-gradient(135deg, #5C3D2E 0%, #8B5E3C 100%);
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+
+body{
+    background-color: var(--bg);
+    font-family: 'Lato', sans-serif;
+    color: var(--dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+}
+
+/* Navbar */
+
+.main-navbar{
+    background-color: var(--grad);
+    padding: 14px 0;
+    box-shadow: 0 2px 12px rgba(30, 10, 0, 0.18);
+
+
+}
+
+.brand-logo {
+    height: 2.5rem;
+    width: auto;
+
+}
+
+.main-navbar .nav-link{
+    color: var(--muted);
+    font-size: 0.92rem;
+    font-weight: 500;
+    padding: 6px 14px;
+    transition:  0.2s, 0.1s;
+    letter-spacing: 0.2px;
+    
+
+}
+
+
+.main-navbar .nav-link:hover {
+    background: rgba(255, 248, 240, 0.12);
+    color: var(--primary);
+    transform: translateY(-2px);
+    
+
+}
+
+/* Register pill button */
+.nav-register-btn {
+    background: var(--accent) !important;
+    color: #ffffff !important;
+    border-radius: 20px !important;
+    padding: 6px 18px !important;
+    font-weight: 500 !important;
+    transition: background-color 0.2s, transform 0.15s !important;
+}
+
+.nav-register-btn:hover {
+    background: #cf6428 !important;
+    transform: translateY(-1px);
+    color: #ffffff !important;
+}
+
+/* Logout link */
+.nav-logout {
+    color:var(--accent);
+}
+
+.nav-logout:hover {
+    color: #ffcda0 !important;
+    background: rgba(232, 121, 58, 0.15) !important;
+}
+
+/* Hamburger icon */
+.navbar-toggler {
+    border-color: rgba(255, 248, 240, 0.4) !important;
+}
+
+
+.navbar-toggler-icon {
+    background-image:  url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%233E1C00' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");    
+    filter: invert(1);
+}
+
+/* ─── Main content ───────────────────────── */
+.main-content {
+    flex: 1;
+    padding-bottom: 40px;
+}
+
+/* ─── Messages ───────────────────────────── */
+.messages{
+    text-align: center;
+    width: 50%;
+    margin: auto;
+    
+    
+    
+}
+
+
+.alert {
+    border-radius: 10px;
+    font-size: 0.92rem;
+    border: none;
+}
+
+.alert-success {
+    background: #f0faf0;
+    color: #2d6a2d;
+}
+
+.alert-danger {
+    background: #fff0f0;
+    color: #a03030;
+}
+
+.alert-warning {
+    background: #fffbf0;
+    color: #7a5c00;
+}
+
+.alert-info {
+    background: #f0f6ff;
+    color: #1a4a8a;
+}
+
+
+
+/* ─── Footer ─────────────────────────────── */
+.main-footer {
+    background: var(--grad);
+    color: var(--secondary);
+    padding: 48px 0 0;
+    margin-top: auto;
+    text-align: center;
+}
+
+.footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.footer-heading {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent);
+    margin-bottom: 14px;
+}
+
+.footer-text {
+    font-size: 0.88rem;
+    color: rgba(255, 248, 240, 0.75);
+    line-height: 1.8;
+    margin-bottom: 6px;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 8px;
+}
+
+.footer-links a {
+    color: rgba(255, 248, 240, 0.75);
+    text-decoration: none;
+    font-size: 0.88rem;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: var(--accent);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 248, 240, 0.12);
+    margin-top: 32px;
+    padding: 16px 0;
+    text-align: center;
+}
+
+.footer-bottom p {
+    font-size: 0.82rem;
+    color: rgba(255, 248, 240, 0.5);
+    margin: 0;
+}

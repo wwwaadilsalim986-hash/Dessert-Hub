@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Login — DessertHub{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/accounts/register.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+
+    <img src="{% static 'images/store/logo.png' %}" alt="DessertHub" class="auth-logo">
+
+    <div class="card auth-card shadow-sm">
+        <h3 class="auth-title">Welcome Back !</h3>
+        <p class="auth-subtitle">Login to your account</p>
+
+        <form method="POST" >
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input 
+                type="text" 
+                name="username" 
+                class="form-control auth-input"
+                placeholder=" Enter your Username"
+                value="{{ request.POST.username|default:'' }}" required>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label">Password</label>
+                <input 
+                type="password" 
+                name="password" 
+                placeholder="Enter your password"
+                class="form-control auth-input" required>
+            </div>
+
+            <button type="submit" class="btn-auth w-100">Login</button>
+        </form>
+
+        <p class="auth-bottom-link">
+            Don't have an account? <a href="/register/">Register</a>
+        </p>
+    </div>
+
+</div>
+{% endblock %}

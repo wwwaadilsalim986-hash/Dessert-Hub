@@ -1,0 +1,170 @@
+/* ─── Page Wrapper ───────────────────────── */
+.edit-profile-wrapper {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 16px;
+}
+
+/* ─── Card ───────────────────────────────── */
+.edit-profile-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 40px 36px;
+    box-shadow: 0 4px 24px rgba(30,10,0,0.10);
+    width: 100%;
+    max-width: 520px;
+    border-top: 4px solid var(--accent);
+}
+
+/* ─── Header ─────────────────────────────── */
+.edit-profile-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--dark);
+    text-align: center;
+    margin-bottom: 6px;
+}
+.edit-profile-subtitle {
+    font-size: 0.88rem;
+    color: var(--muted);
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+/* ─── Profile Picture Preview ────────────── */
+.edit-profile-preview {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--accent);
+    display: block;
+    margin: 0 auto 8px;
+}
+
+/* ─── Labels ─────────────────────────────── */
+.edit-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    display: block;
+}
+
+/* ─── Inputs ─────────────────────────────── */
+.edit-input {
+    background: var(--secondary);
+    border: 1px solid rgba(62,28,0,0.15);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.92rem;
+    color: var(--dark);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%;
+}
+.edit-input:focus {
+    background: #ffffff;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(232,121,58,0.12);
+    outline: none;
+}
+.edit-input::placeholder {
+    color: #b89880;
+    font-size: 0.88rem;
+}
+
+/* ─── Input Group ────────────────────────── */
+.edit-input-icon {
+    background: var(--secondary);
+    border: 1px solid rgba(62,28,0,0.15);
+    border-right: none;
+    border-radius: 10px 0 0 10px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    padding: 10px 12px;
+}
+.input-group .edit-input {
+    border-left: none;
+    border-radius: 0 10px 10px 0;
+}
+.input-group .edit-input:focus {
+    border-color: var(--accent);
+    box-shadow: none;
+}
+.input-group:focus-within .edit-input-icon {
+    border-color: var(--accent);
+}
+
+/* ─── Textarea ───────────────────────────── */
+textarea.edit-input {
+    resize: vertical;
+    min-height: 100px;
+    line-height: 1.6;
+}
+
+/* ─── File Input ─────────────────────────── */
+input[type="file"].edit-input {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+input[type="file"].edit-input::file-selector-button {
+    background: var(--accent);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 4px 14px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background 0.2s;
+}
+input[type="file"].edit-input::file-selector-button:hover {
+    background: #cf6428;
+}
+
+/* ─── Submit Button ──────────────────────── */
+.edit-btn {
+    display: block;
+    width: 100%;
+    background: var(--grad);
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.15s;
+    letter-spacing: 0.3px;
+}
+.edit-btn:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
+}
+
+/* ─── Cancel Link ────────────────────────── */
+.edit-link {
+    color: var(--accent);
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.edit-link:hover {
+    color: var(--primary);
+}
+
+/* ─── Mobile ─────────────────────────────── */
+@media (max-width: 576px) {
+    .edit-profile-card {
+        padding: 28px 20px;
+        border-radius: 16px;
+    }
+    .edit-profile-title { font-size: 1.3rem; }
+}

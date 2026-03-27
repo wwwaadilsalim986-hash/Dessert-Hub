@@ -1,0 +1,398 @@
+/* ─── Banner ─────────────────────────────── */
+.baker-banner {
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    position: relative;
+}
+.banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.banner-placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--grad);
+}
+
+/* ─── Baker Info Card ────────────────────── */
+.baker-info-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 16px rgba(30,10,0,0.09);
+    margin-top: -40px;
+    position: relative;
+    z-index: 10;
+}
+
+/* ─── Avatar ─────────────────────────────── */
+.baker-store-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--accent);
+    flex-shrink: 0;
+}
+
+/* ─── Store Info ─────────────────────────── */
+.baker-info-body {
+    flex: 1;
+    min-width: 0;
+}
+.baker-store-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--dark);
+}
+.baker-store-meta {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 6px;
+}
+.baker-store-desc {
+    font-size: 0.88rem;
+    color: #5a4030;
+    line-height: 1.7;
+    margin-bottom: 12px;
+}
+
+/* ─── Badges ─────────────────────────────── */
+.badge-verified {
+    background: #e8f7e8;
+    color: #2d6a2d;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+.badge-custom {
+    background: #fff3e0;
+    color: #b85c00;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+/* ─── Stats Row ──────────────────────────── */
+.stats-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+.stat-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--secondary);
+    border-radius: 10px;
+    padding: 10px 20px;
+    min-width: 80px;
+}
+.stat-number {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+.stat-label {
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+}
+
+/* ─── Action Buttons ─────────────────────── */
+.baker-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+}
+.btn-edit-store {
+    display: inline-block;
+    background: transparent;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 7px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s;
+    white-space: nowrap;
+    text-align: center;
+}
+.btn-edit-store:hover {
+    background: var(--accent);
+    color: #fff;
+}
+.btn-logout {
+    display: inline-block;
+    background: transparent;
+    border: 2px solid #a03030;
+    color: #a03030;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 7px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s;
+    white-space: nowrap;
+    text-align: center;
+}
+.btn-logout:hover {
+    background: #a03030;
+    color: #fff;
+}
+
+/* ─── Section Title ──────────────────────── */
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--dark);
+}
+.product-count {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-weight: 400;
+}
+
+/* ─── Add Product Button ─────────────────── */
+.btn-add-product {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background-color 0.2s, transform 0.15s;
+    white-space: nowrap;
+}
+.btn-add-product:hover {
+    background: #cf6428;
+    transform: translateY(-1px);
+    color: #fff;
+}
+
+/* ─── Product Card ───────────────────────── */
+.product-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+}
+.product-card {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(30,10,0,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+}
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(30,10,0,0.14);
+}
+.product-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+.product-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+.product-body {
+    padding: 12px 14px 14px;
+}
+.product-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.product-baker {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 10px;
+}
+.product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.product-price {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+.btn-order {
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.76rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 20px;
+}
+
+/* ─── Empty Store ────────────────────────── */
+.empty-store {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--muted);
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 10px rgba(30,10,0,0.07);
+}
+.empty-store i {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 12px;
+    color: var(--accent);
+}
+.empty-store p {
+    font-size: 0.92rem;
+    margin-bottom: 0;
+}
+
+/* ─── Floating Edit Button ───────────────── */
+.btn-floating-edit {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    background: var(--primary);
+    color: #fff;
+    font-size: 0.88rem;
+    font-weight: 600;
+    padding: 12px 22px;
+    border-radius: 30px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(30,10,0,0.25);
+    transition: background-color 0.2s, transform 0.15s;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.btn-floating-edit:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+    color: #fff;
+}
+
+/* ─── Edit Modal ─────────────────────────── */
+.edit-modal {
+    border-radius: 16px;
+    overflow: hidden;
+    border: none;
+}
+.edit-modal-header {
+    background: var(--grad);
+    color: #fff;
+    border: none;
+    padding: 16px 20px;
+}
+.edit-modal-header .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+}
+.edit-modal-header .btn-close {
+    filter: invert(1);
+}
+.edit-modal-body {
+    padding: 12px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* ─── Edit Product Item ──────────────────── */
+.edit-product-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: background-color 0.2s;
+    margin-bottom: 4px;
+}
+.edit-product-item:hover {
+    background: var(--secondary);
+}
+.edit-product-thumb {
+    width: 56px;
+    height: 56px;
+    border-radius: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.edit-product-info {
+    flex: 1;
+    min-width: 0;
+}
+.edit-product-name {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.edit-product-price {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin: 0;
+}
+.edit-product-arrow {
+    color: var(--muted);
+    font-size: 0.88rem;
+    flex-shrink: 0;
+}
+
+/* ─── Mobile ─────────────────────────────── */
+@media (max-width: 768px) {
+    .baker-banner     { height: 180px; }
+    .baker-info-card  { margin-top: -24px; padding: 16px; }
+    .baker-store-name { font-size: 1.1rem; }
+    .baker-actions    { flex-direction: row; }
+    .stat-box         { padding: 8px 14px; }
+    .product-card     {  max-width: fit-content; }
+    .btn-floating-edit {
+        bottom: 20px;
+        right: 16px;
+        padding: 10px 18px;
+        font-size: 0.82rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .row-cols-2 > .col {
+        width: 100%;    
+    }
+}

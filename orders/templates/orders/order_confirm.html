@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Confirm Order — DessertHub{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/accounts/become_baker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/orders/orders.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="become-wrapper">
+    <div class="become-card">
+
+        <!-- Header -->
+        <div class="become-header">
+            <h2 class="become-title">Confirm Order 🍰</h2>
+            <p class="become-subtitle">Step 1 of 2 — Review your item and select quantity</p>
+        </div>
+
+        <!-- Product Summary -->
+        <div class="form-section">
+            <h5 class="section-heading">
+                <i class="bi bi-bag me-2"></i>Your Item
+            </h5>
+
+            <div class="d-flex align-items-center gap-3 mb-3">
+                {% with product.images.first as img %}
+                    {% if img %}
+                        <img src="{{ img.image.url }}" alt="{{ product.name }}" class="order-product-img">
+                    {% endif %}
+                {% endwith %}
+                <div>
+                    <p class="order-product-name">{{ product.name }}</p>
+                    <p class="order-product-store">{{ product.baker.baker_profile.store_name }}</p>
+                    <p class="order-product-price">₹ {{ product.price }} per item</p>
+                </div>
+            </div>
+
+            <div class="price-summary-box">
+                <div class="price-summary-row">
+                    <span class="price-summary-label">Price per item</span>
+                    <span class="price-summary-value">₹ {{ product.price }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quantity -->
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-section">
+                <h5 class="section-heading">
+                    <i class="bi bi-123 me-2"></i>Select Quantity
+                </h5>
+
+                <div class="mb-3">
+                    <label class="form-label auth-label">Quantity</label>
+                    {{ form.quantity }}
+                    <small class="hint-text">{{ product.stock }} items available in stock</small>
+                </div>
+            </div>
+
+            <button type="submit" class="auth-btn w-100">
+                Continue to Delivery Details <i class="bi bi-arrow-right ms-2"></i>
+            </button>
+        </form>
+
+        <p class="text-center mt-3">
+            <a href="/product_detail/{{ product.id }}/" class="auth-link">← Back to Product</a>
+        </p>
+
+    </div>
+</div>
+{% endblock %}

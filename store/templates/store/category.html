@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ category.name }} — DessertHub{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/store/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+    <!-- Header -->
+    <div class="d-flex align-items-center gap-3 mb-2">
+        {% if category.image %}
+            <img src="{{ category.image.url }}" alt="{{ category.name }}"
+                 style="width:52px; height:52px; border-radius:50%; object-fit:cover; border: 2px solid var(--accent);">
+        {% endif %}
+        <div>
+            <h2 class="section-title mb-0">{{ category.name }}</h2>
+            <p class="text-muted small mb-0">{{ products.count }} product{{ products.count|pluralize }} found</p>
+        </div>
+    </div>
+
+    <!-- Category Pills (filter bar) -->
+    <div class="category-row mt-4 mb-5">
+
+        {% for cat in categories %}
+        <div class="category-item">
+            <a href="/category/{{ cat.id }}/" class="category-link">
+                <div class="category-circle {% if cat.id == category.id %}active-category{% endif %}">
+                    {% if cat.image %}
+                        <img src="{{ cat.image.url }}" alt="{{ cat.name }}">
+                    {% else %}
+                        <img src="{% static 'images/store/default_category.png' %}" alt="{{ cat.name }}">
+                    {% endif %}
+                </div>
+                <span class="category-label {% if cat.id == category.id %}active-label{% endif %}">
+                    {{ cat.name }}
+                </span>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Products Grid -->
+    {% if products %}
+    <div class="row row-cols-2 row-cols-md-2 row-cols-lg-4 g-4">
+        {% for product in products %}
+        <div class="col">
+            <a href="/product_detail/{{ product.id }}/" class="product-card-link">
+                <div class="product-card">
+                    {% with product.images.first as main_image %}
+                        {% if main_image %}
+                            <img src="{{ main_image.image.url }}" alt="{{ product.name }}" class="product-img">
+                        {% else %}
+                            <img src="{% static 'images/store/default_product.png' %}" alt="{{ product.name }}" class="product-img">
+                        {% endif %}
+                    {% endwith %}
+                    <span class="product-badge">{{ product.category }}</span>
+                    <div class="product-body">
+                        <h5 class="product-name">{{ product.name }}</h5>
+                        <p class="product-baker"><i class="bi bi-shop me-1"></i>{{ product.baker }}</p>
+                        <div class="product-footer">
+                            <span class="product-price">₹ {{ product.price }}</span>
+                            <span class="btn-order">View Details</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% else %}
+    <div class="text-center py-5">
+        <i class="bi bi-basket2" style="font-size: 3rem; color: #d4b8a8;"></i>
+        <p class="mt-3" style="color: var(--muted);">No products in this category yet.</p>
+        <a href="/" class="btn btn-dark mt-2">Back to Home</a>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

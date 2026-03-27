@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Edit Profile — DessertHub{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/accounts/edit_profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="edit-profile-wrapper">
+    <div class="edit-profile-card">
+
+        <h2 class="edit-profile-title">Edit Profile</h2>
+        <p class="edit-profile-subtitle">Update your personal information</p>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- Profile Picture -->
+            <div class="mb-4 text-center">
+                {% if request.user.profile.profile_pic %}
+                    <img src="{{ request.user.profile.profile_pic.url }}"
+                         alt="Profile"
+                         class="edit-profile-preview">
+                {% else %}
+                    <img src="{% static 'images/accounts/default_profile.png' %}"
+                         alt="Profile"
+                         class="edit-profile-preview">
+                {% endif %}
+                <div class="mt-2">
+                    <label class="edit-label">Profile Picture</label>
+                    <input type="file"
+                           name="profile_pic"
+                           class="form-control edit-input"
+                           accept="image/*">
+                </div>
+            </div>
+
+            <!-- Username -->
+            <div class="mb-3">
+                <label class="edit-label">Username</label>
+                <div class="input-group">
+                    <span class="input-group-text edit-input-icon">
+                        <i class="bi bi-person"></i>
+                    </span>
+                    <input type="text"
+                           name="username"
+                           class="form-control edit-input"
+                           value="{{ request.user.username }}"
+                           required>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label class="edit-label">Email</label>
+                <div class="input-group">
+                    <span class="input-group-text edit-input-icon">
+                        <i class="bi bi-envelope"></i>
+                    </span>
+                    <input type="email"
+                           name="email"
+                           class="form-control edit-input"
+                           value="{{ request.user.email }}"
+                           required>
+                </div>
+            </div>
+
+            <!-- Phone -->
+            <div class="mb-3">
+                <label class="edit-label">Phone Number</label>
+                <div class="input-group">
+                    <span class="input-group-text edit-input-icon">
+                        <i class="bi bi-telephone"></i>
+                    </span>
+                    <input type="text"
+                           name="phone"
+                           class="form-control edit-input"
+                           placeholder="e.g. 9876543210"
+                           value="{{ request.user.profile.phone_no|default:'' }}">
+                </div>
+            </div>
+
+            <!-- Address -->
+            <div class="mb-4">
+                <label class="edit-label">Address</label>
+                <textarea name="address"
+                          class="form-control edit-input"
+                          rows="3"
+                          placeholder="Your full address...">{{ request.user.profile.address|default:'' }}</textarea>
+            </div>
+
+            <!-- Pincode -->
+            <div class="mb-4">
+                <label class="edit-label">Pincode</label>
+                <div class="input-group">
+                    <span class="input-group-text edit-input-icon">
+                        <i class="bi bi-mailbox"></i>
+                    </span>
+                    <input type="text"
+                        name="pincode"
+                        class="form-control edit-input"
+                        placeholder="e.g. 695001"
+                        maxlength="10"
+                        value="{{ request.user.profile.pincode|default:'' }}">
+                </div>
+            </div>           
+
+            <!-- Submit -->
+            <button type="submit" class="edit-btn">
+                <i class="bi bi-check2-circle me-2"></i>Save Changes
+            </button>
+
+        </form>
+
+        <p class="text-center mt-3">
+            <a href="/profile/" class="edit-link">
+                ← Cancel, go back to Profile
+            </a>
+        </p>
+
+    </div>
+</div>
+{% endblock %}

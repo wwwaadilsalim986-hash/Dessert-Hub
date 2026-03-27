@@ -1,0 +1,137 @@
+/* ─── Profile Card ───────────────────────── */
+.profile-card {
+    background: #ffffff;
+    border-radius: 20px;  
+    padding: 32px 24px;
+    box-shadow: 0 2px 16px rgba(30,10,0,0.09);
+    text-align: center;
+    position: sticky;
+    top: 24px; 
+    margin: auto;                 /* stays visible when scrolling */
+}
+
+.become-baker-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 40px 32px;
+    box-shadow: 0 2px 16px rgba(30,10,0,0.09);
+    text-align: center;
+    border-top: 4px solid var(--accent);
+}
+
+/* ─── Profile Picture ────────────────────── */
+.profile-pic-wrapper {
+    margin-bottom: 16px;
+}
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--accent);
+}
+
+/* ─── User Info ──────────────────────────── */
+.profile-username {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 6px;
+}
+.profile-email,
+.profile-phone {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 4px;
+}
+
+/* ─── Role Badge ─────────────────────────── */
+.role-badge {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+.role-badge.baker    { background: #fff3e0; color: #b85c00; }
+.role-badge.customer { background: #e8f0ff; color: #1a4aaa; }
+
+/* ─── Edit Profile Button ────────────────── */
+.btn-edit-profile {
+    display: block;
+    background: transparent;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    font-size: 0.88rem;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s;
+}
+.btn-edit-profile:hover {
+    background: var(--accent);
+    color: #fff;
+}
+
+/* ─── Become Baker Card ──────────────────── */
+.become-baker-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 40px 32px;
+    box-shadow: 0 2px 16px rgba(30,10,0,0.09);
+    text-align: center;
+    border-top: 4px solid var(--accent);
+}
+.become-baker-icon {
+    font-size: 3rem;
+    margin-bottom: 16px;
+}
+.become-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 10px;
+}
+.become-desc {
+    font-size: 0.92rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 24px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ─── Become Seller Button ───────────────── */
+.btn-become-baker {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 12px 36px;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: background-color 0.2s, transform 0.15s;
+}
+.btn-become-baker:hover {
+    background: #cf6428;
+    transform: translateY(-2px);
+    color: #fff;
+}
+
+
+/* ─── Mobile ─────────────────────────────── */
+@media (max-width: 768px) {
+    .profile-card {
+        position: static;       /* remove sticky on mobile */
+        margin-bottom: 8px;
+    }
+    .become-baker-card {
+        padding: 28px 20px;
+    }
+}

@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Add Product — DessertHub{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/store/add_product.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="product-form-wrapper">
+    <div class="product-form-card">
+
+        <!-- Header -->
+        <div class="product-form-header">
+            <h2 class="product-form-title">Add New Product</h2>
+            <p class="product-form-subtitle"> Fill the details of your new product </p>
+        </div>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="row g-4">
+
+                <!-- ── Left Column ── -->
+                <div class="col-lg-6">
+
+                    <!-- Product Name -->
+                    <div class="mb-3">
+                        <label class="pf-label">Product Name <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text pf-icon"><i class="bi bi-cake2"></i></span>
+                            <input type="text"
+                                   name="name"
+                                   class="form-control pf-input"
+                                   placeholder="e.g. Choco Truffle Cake"
+                                   value="{{ form.name.value|default:'' }}"
+                                   required>
+                        </div>
+                        {% if form.name.errors %}
+                            <p class="pf-error">{{ form.name.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Category -->
+                    <div class="mb-3">
+                        <label class="pf-label">Category <span class="text-danger">*</span></label>
+                        <select name="category" class="form-select pf-input" required>
+                            <option value="">-- Select Category --</option>
+                            {% for category in categories %}
+                                <option value="{{ category.id }}"
+                                    {% if form.category.value == category.id %}selected{% endif %}>
+                                    {{ category.name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                        {% if form.category.errors %}
+                            <p class="pf-error">{{ form.category.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Price -->
+                    <div class="mb-3">
+                        <label class="pf-label">Price (₹) <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text pf-icon"><i class="bi bi-currency-rupee"></i></span>
+                            <input type="number"
+                                   name="price"
+                                   class="form-control pf-input"
+                                   placeholder="e.g. 499"
+                                   min="0"
+                                   step="0.01"
+                                   value="{{ form.price.value|default:'' }}"
+                                   required>
+                        </div>
+                        {% if form.price.errors %}
+                            <p class="pf-error">{{ form.price.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Stock -->
+                    <div class="mb-3">
+                        <label class="pf-label">Stock Quantity <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text pf-icon"><i class="bi bi-box-seam"></i></span>
+                            <input type="number"
+                                   name="stock"
+                                   class="form-control pf-input"
+                                   placeholder="e.g. 10"
+                                   min="0"
+                                   value="{{ form.stock.value|default:'' }}"
+                                   required>
+                        </div>
+                        {% if form.stock.errors %}
+                            <p class="pf-error">{{ form.stock.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Is Available -->
+                    <div class="mb-3">
+                        <div class="custom-toggle">
+                            <input type="checkbox"
+                                   name="is_available"
+                                   id="isAvailable"
+                                   class="toggle-input"
+                                   checked>
+                            <label for="isAvailable" class="toggle-label">
+                                <span class="toggle-switch"></span>
+                                Product is Available
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ── Right Column ── -->
+                <div class="col-lg-6">
+
+                    <!-- Description -->
+                    <div class="mb-3">
+                        <label class="pf-label">Description <span class="text-danger">*</span></label>
+                        <textarea name="description"
+                                  class="form-control pf-input pf-textarea"
+                                  rows="4"
+                                  placeholder="Describe your dessert — ingredients, taste, size..."
+                                  required>{{ form.description.value|default:'' }}</textarea>
+                        {% if form.description.errors %}
+                            <p class="pf-error">{{ form.description.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Images -->
+                    <div class="mb-3">
+                        <label class="pf-label">Product Images</label>
+                        <small class="pf-hint">Upload up to 6 images. First image will be the main cover.</small>
+
+                        {% for i in "123456" %}
+                        <div class="image-input-row">
+                            <label class="pf-image-label">Image {{ forloop.counter }}</label>
+                            <input type="file"
+                                   name="image_{{ forloop.counter }}"
+                                   class="form-control pf-input"
+                                   accept="image/*">
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Submit -->
+            <div class="mt-4">
+                <button type="submit" class="pf-btn w-100">
+                    <i class="bi bi-plus-circle me-2"></i>Add Product
+                </button>
+            </div>
+
+        </form>
+
+        <!-- Cancel -->
+        <p class="text-center mt-3">
+            <a href="/my-store/{{ request.user.baker_profile.id }}/" class="pf-link">
+                ← Cancel, go back to My Store
+            </a>
+        </p>
+
+    </div>
+</div>
+{% endblock %}

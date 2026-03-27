@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Register — DessertHub{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/accounts/register.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+
+    <!-- Logo -->
+    <img src="{% static 'images/store/logo.png' %}" alt="DessertHub" class="auth-logo">
+
+    <!-- Card -->
+    <div class="card auth-card shadow-sm">
+        <h3 class="auth-title">Create Account</h3>
+        <p class="auth-subtitle">Join DessertHub today</p>
+
+        <form method="POST" action="">
+            {% csrf_token %}
+
+            <!-- Username -->
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input 
+                type="text"
+                name="username"
+                class="form-control auth-input"
+                placeholder="eg. Arun_123 "
+                value="{{ request.POST.username|default:'' }}" required>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label class="form-label">Email Address</label>
+                <input 
+                type="email" 
+                name="email" 
+                class="form-control auth-input"
+                placeholder=" eg. myemail@gmail.com "
+                value="{{ request.POST.email|default:'' }}" >
+            </div>
+
+            <!-- Phone -->
+            <div class="mb-3">
+                <label class="form-label">Phone Number</label>
+                <input 
+                type="text" 
+                name="phone" 
+                class="form-control auth-input"
+                placeholder="eg. 98765658677 "
+                value="{{ request.POST.phone|default:'' }}" required>
+            </div>
+
+            <!-- Password row -->
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Password</label>
+                    <input 
+                    type="password" 
+                    name="password1" 
+                    placeholder="eg. xyz3qhxx "
+                    class="form-control auth-input" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Confirm Password</label>
+                    <input 
+                    type="password" 
+                    name="password2" 
+                    placeholder="eg. xyz3qhxx "
+                    class="form-control auth-input" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-auth w-100">Create Account</button>
+        </form>
+
+        <p class="auth-bottom-link">
+            Already have an account? <a href="/login/">Login</a>
+        </p>
+    </div>
+
+</div>
+{% endblock %}

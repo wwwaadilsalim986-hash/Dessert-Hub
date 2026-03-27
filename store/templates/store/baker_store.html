@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ baker.store_name }} — DessertHub{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/store/baker_store.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- Banner -->
+<div class="baker-banner">
+    {% if baker.banner %}
+        <img src="{{ baker.banner.url }}" alt="Store Banner" class="banner-img">
+    {% else %}
+        <div class="banner-placeholder"></div>
+    {% endif %}
+</div>
+
+<div class="container">
+
+    <!-- Baker Info Card -->
+    <div class="baker-info-card">
+        <div class="d-flex align-items-start gap-3 flex-wrap">
+
+            <!-- Profile Pic -->
+            {% if baker.profile_pic %}
+                <img src="{{ baker.profile_pic.url }}" alt="Baker" class="baker-store-avatar">
+            {% else %}
+                <img src="{% static 'images/accounts/baker-dp.png' %}" alt="Baker" class="baker-store-avatar">
+            {% endif %}
+
+            <!-- Store Info -->
+            <div class="baker-info-body">
+                <div class="d-flex align-items-center flex-wrap gap-2 mb-1">
+                    <h2 class="baker-store-name mb-0">{{ baker.store_name }}</h2>
+                    {% if baker.is_verified %}
+                        <span class="badge-verified">
+                            <i class="bi bi-patch-check-fill me-1"></i>Verified Baker
+                        </span>
+                    {% endif %}
+                    {% if baker.accepts_custom_orders %}
+                        <span class="badge-custom">
+                            <i class="bi bi-star me-1"></i>Accepts Custom Orders
+                        </span>
+                    {% endif %}
+                </div>
+
+                <p class="baker-store-meta">
+                    <i class="bi bi-shop me-1"></i>{{ baker.get_business_type_display }}
+                    &nbsp;·&nbsp;
+                    <i class="bi bi-geo-alt me-1"></i>{{ baker.city }}{% if baker.state %}, {{ baker.state }}{% endif %}
+                </p>
+
+                {% if baker.description %}
+                    <p class="baker-store-desc">{{ baker.description }}</p>
+                {% endif %}
+
+                <!-- Stats -->
+                <div class="stats-row">
+                    <div class="stat-box">
+                        <span class="stat-number">{{ products.count }}</span>
+                        <span class="stat-label">Products</span>
+                    </div>
+                    {% if baker.years_of_experience %}
+                    <div class="stat-box">
+                        <span class="stat-number">{{ baker.years_of_experience }}</span>
+                        <span class="stat-label">Yrs Experience</span>
+                    </div>
+                    {% endif %}
+                    <div class="stat-box">
+                        <span class="stat-number">{{ baker.get_business_type_display }}</span>
+                        <span class="stat-label">Business Type</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            {% if request.user == baker.user %}
+            <div class="baker-actions ms-auto">
+                <a href="/edit-store/" class="btn-edit-store">
+                    <i class="bi bi-pencil-square me-1"></i>Edit Store
+                </a>
+                <a href="/logout/" class="btn-logout">
+                    <i class="bi bi-box-arrow-right me-1"></i>Logout
+                </a>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+
+        <div class="product-title mt-4">
+        <h4 class="section-title">
+            Our Products
+            <span class="product-count">({{ products.count }})</span>
+        </h4>
+        </div>
+
+    <!-- Products Section -->
+    <div class="mt-5 mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            {% if request.user == baker.user %}
+            <a href="/add-product/" class="btn-edit-store">
+                <i class="bi bi-plus-circle me-1"></i>Add Product
+            </a>
+            <a href="/baker-orders/" class="btn-edit-store">
+                <i class="bi bi-bag-check me-1"></i>Store Orders
+            </a>          
+            {% endif %}
+        </div>
+
+        <div class="row row-cols-2 row-cols-md-2 row-cols-lg-4 g-4">
+            {% for product in products %}
+            <div class="col">
+                <a href="/product_detail/{{ product.id }}/" class="product-card-link">
+                    <div class="product-card">
+                        {% with product.images.first as main_image %}
+                            {% if main_image %}
+                                <img src="{{ main_image.image.url }}" alt="{{ product.name }}" class="product-img">
+                            {% else %}
+                                <img src="{% static 'images/store/default_product.png' %}" alt="{{ product.name }}" class="product-img">
+                            {% endif %}
+                        {% endwith %}
+
+                        <span class="product-badge">{{ product.category }}</span>
+
+                        <div class="product-body">
+                            <h5 class="product-name">{{ product.name }}</h5>
+                            <p class="product-baker">
+                                <i class="bi bi-shop me-1"></i>{{ baker.store_name }}
+                            </p>
+                            <div class="product-footer">
+                                <span class="product-price">₹ {{ product.price }}</span>
+                                <span class="btn-order">View</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            {% empty %}
+            <div class="col-12">
+                <div class="empty-store">
+                    <i class="bi bi-basket2"></i>
+                    <p>No products added yet.</p>
+                    {% if request.user == baker.user %}
+                    <a href="/add-product/" class="btn-add-product mt-3">
+                        <i class="bi bi-plus-circle me-1"></i>Add your first product
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+
+<!-- Floating Edit Product Button + Modal -->
+{% if request.user == baker.user %}
+<a href="#" class="btn-floating-edit" data-bs-toggle="modal" data-bs-target="#editProductModal">
+    <i class="bi bi-pencil-square me-1"></i>Edit Product
+</a>
+
+<div class="modal fade" id="editProductModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content edit-modal">
+
+            <div class="modal-header edit-modal-header">
+                <h5 class="modal-title">Choose a Product to Edit</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body edit-modal-body">
+                {% if products %}
+                    {% for product in products %}
+                    <a href="/edit-product/{{ product.id }}/" class="edit-product-item">
+                        {% with product.images.first as img %}
+                            {% if img %}
+                                <img src="{{ img.image.url }}" alt="{{ product.name }}" class="edit-product-thumb">
+                            {% else %}
+                                <img src="{% static 'images/store/default_product.png' %}" alt="{{ product.name }}" class="edit-product-thumb">
+                            {% endif %}
+                        {% endwith %}
+                        <div class="edit-product-info">
+                            <p class="edit-product-name">{{ product.name }}</p>
+                            <p class="edit-product-price">₹ {{ product.price }}</p>
+                        </div>
+                        <i class="bi bi-chevron-right edit-product-arrow"></i>
+                    </a>
+                    {% endfor %}
+                {% else %}
+                    <div class="text-center py-4">
+                        <i class="bi bi-basket2" style="font-size:2rem; color: var(--muted);"></i>
+                        <p style="color: var(--muted); margin-top: 8px;">No products added yet.</p>
+                    </div>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}
+

@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Become a Baker — DessertHub{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/accounts/become_baker.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div class="become-wrapper">
+    <div class="become-card">
+
+        <!-- Header -->
+        <div class="become-header">
+            <h2 class="become-title">Become a Baker 🍰</h2>
+            <p class="become-subtitle">Set up your store on DessertHub</p>
+        </div>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- ── Section 1: Store Info ── -->
+            <div class="form-section">
+                <h5 class="section-heading">
+                    <i class="bi bi-shop me-2"></i>Store Information
+                </h5>
+
+                <!-- Store Name -->
+                <div class="mb-3">
+                    <label class="form-label auth-label">Store Name <span class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-text auth-input-icon"><i class="bi bi-shop"></i></span>
+                        <input type="text" name="store_name" class="form-control auth-input"
+                               placeholder="e.g. Delicious Bakes" required>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="mb-3">
+                    <label class="form-label auth-label">Store Description</label>
+                    <textarea name="description" 
+                            class="form-control auth-input" 
+                            rows="4"
+                            placeholder="Tell customers about your store, specialties, and what makes your desserts unique..."></textarea>
+                </div>
+
+                <!-- Banner Image -->
+                <div class="mb-3">
+                    <label class="form-label auth-label">Store Banner <span class="optional-tag">(Optional)</span></label>
+                    <input type="file" name="banner" class="form-control auth-input" accept="image/*">
+                    <small class="hint-text">This banner will appear at the top of your store page. Recommended size: 1200x300px</small>
+                </div>
+                
+                <!-- Phone -->
+                <div class="mb-3">
+                    <label class="form-label auth-label">Phone Number</label>
+                    <div class="input-group">
+                        <span class="input-group-text auth-input-icon"><i class="bi bi-telephone"></i></span>
+                        <input type="text" name="phone" class="form-control auth-input"
+                               placeholder="e.g. 9876543210">
+                    </div>
+                </div>
+
+                <!-- City + State -->
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label auth-label">City</label>
+                        <div class="input-group">
+                            <span class="input-group-text auth-input-icon"><i class="bi bi-geo-alt"></i></span>
+                            <input type="text" name="city" class="form-control auth-input"
+                                   placeholder="e.g. Kochi">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label auth-label">State</label>
+                        <div class="input-group">
+                            <span class="input-group-text auth-input-icon"><i class="bi bi-map"></i></span>
+                            <input type="text" name="state" class="form-control auth-input"
+                                   placeholder="e.g. Kerala">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business Type + Experience -->
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label auth-label">Business Type</label>
+                        <select name="business_type" class="form-select auth-input">
+                            <option value="">-- Select --</option>
+                            <option value="home_baker">Home Baker</option>
+                            <option value="bakery">Bakery</option>
+                            <option value="cloud_kitchen">Cloud Kitchen</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label auth-label">Years of Experience</label>
+                        <div class="input-group">
+                            <span class="input-group-text auth-input-icon"><i class="bi bi-calendar"></i></span>
+                            <input type="number" name="years_of_experience" class="form-control auth-input"
+                                   placeholder="e.g. 3" min="0" max="50">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Picture -->
+                <div class="mb-3">
+                    <label class="form-label auth-label">Profile Picture</label>
+                    <input type="file" name="profile_pic" class="form-control auth-input" accept="image/*">
+                    <small class="hint-text">This will be shown on your store page.</small>
+                </div>
+
+                <!-- Accepts Custom Orders -->
+                <div class="mb-3">
+                    <div class="custom-toggle">
+                        <input type="checkbox" name="accepts_custom_orders" id="customOrders" class="toggle-input">
+                        <label for="customOrders" class="toggle-label">
+                            <span class="toggle-switch"></span>
+                            I accept custom orders
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Section 2: Legal Info ── -->
+            <div class="form-section">
+                <h5 class="section-heading">
+                    <i class="bi bi-file-earmark-text me-2"></i>Legal Information
+                </h5>
+
+                <!-- FSSAI -->
+                <div class="mb-3">
+                    <label class="form-label auth-label">FSSAI License Number</label>
+                    <div class="input-group">
+                        <span class="input-group-text auth-input-icon"><i class="bi bi-card-text"></i></span>
+                        <input type="text" name="fssai_number" class="form-control auth-input"
+                               placeholder="14 digit FSSAI number">
+                    </div>
+                </div>
+
+                <!-- FSSAI Document -->
+                <div class="mb-3">
+                    <label class="form-label auth-label">FSSAI Certificate</label>
+                    <input type="file" name="fssai_document" class="form-control auth-input" accept="image/*,.pdf">
+                    <small class="hint-text">Upload image or PDF of your FSSAI certificate.</small>
+                </div>
+
+                <!-- GST -->
+                <div class="mb-3">
+                    <label class="form-label auth-label">GST Number <span class="optional-tag">(Optional)</span></label>
+                    <div class="input-group">
+                        <span class="input-group-text auth-input-icon"><i class="bi bi-receipt"></i></span>
+                        <input type="text" name="gst_number" class="form-control auth-input"
+                               placeholder="15 digit GST number">
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Section 3: Aadhaar Verification ── -->
+            <div class="form-section">
+                <h5 class="section-heading">
+                    <i class="bi bi-shield-check me-2"></i>Aadhaar Verification
+                </h5>
+                <p class="section-desc">Your Aadhaar details are encrypted and used only for identity verification.</p>
+
+                <!-- Aadhaar Number -->
+                <div class="mb-3">
+                    <label class="form-label auth-label">Aadhaar Number <span class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-text auth-input-icon"><i class="bi bi-person-vcard"></i></span>
+                        <input type="text" name="aadhaar_number" class="form-control auth-input"
+                               placeholder="12 digit Aadhaar number" maxlength="12">
+                    </div>
+                </div>
+
+                <!-- Aadhaar Front + Back -->
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label auth-label">Aadhaar Card Image</label>
+                        <input type="file" name="aadhaar_front" class="form-control auth-input" accept="image/*">
+                        <small class="hint-text">Front side of Aadhaar card.</small>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label auth-label"></label>
+                        <input type="file" name="aadhaar_back" class="form-control auth-input" accept="image/*">
+                        <small class="hint-text">Back side of Aadhaar card.</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="auth-btn w-100">
+                <i class="bi bi-bag-heart me-2"></i>Create My Store
+            </button>
+
+        </form>
+
+        <!-- Back link -->
+        <p class="text-center mt-3">
+            <a href="/profile/" class="auth-link">
+                ← Go back to Profile
+            </a>
+        </p>
+
+    </div>
+</div>
+{% endblock %}
