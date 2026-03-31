@@ -1,0 +1,172 @@
+{% load static %}
+{% extends 'base.html' %}
+
+{% block title %}Order #{{ order.id }} — DessertHub{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/dashboard/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/orders/order_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+    <!-- Header -->
+    <div class="d-flex align-items-center gap-3 mb-4">
+        <a href="/dashboard/" class="back-link">
+            <i class="bi bi-arrow-left me-1"></i>Back to Dashboard
+        </a>
+    </div>
+
+    <h2 class="dashboard-title">Order #{{ order.id }}</h2>
+    <p class="dashboard-subtitle mb-4">{{ order.created_at|date:"F j, Y — g:i A" }}</p>
+
+    <div class="row g-4">
+
+        <!-- LEFT: Order Info -->
+        <div class="col-lg-6">
+            <div class="card order-card h-100">
+                <div class="card-body p-4">
+
+                    <h5 class="order-card-title mb-4">
+                        <i class="bi bi-bag-check me-2"></i>Order Information
+                    </h5>
+
+                    <div class="detail-row">
+                        <span class="detail-label">Order ID</span>
+                        <span class="detail-value">#{{ order.id }}</span>
+                    </div>
+
+                    <div class="detail-row">
+                        <span class="detail-label">Product</span>
+                        <a href="/product/{{ order.product.id }}/" class="detail-value detail-link">
+                            {{ order.product.name }}
+                        </a>
+                    </div>
+
+                    <div class="detail-row">
+                        <span class="detail-label">Quantity</span>
+                        <span class="detail-value">{{ order.quantity }}</span>
+                    </div>
+
+                    <div class="detail-row">
+                        <span class="detail-label">Total Price</span>
+                        <span class="detail-value detail-price">₹ {{ order.total_price }}</span>
+                    </div>
+
+                    <div class="detail-row">
+                        <span class="detail-label">Order Date</span>
+                        <span class="detail-value">{{ order.created_at|date:"d M Y" }}</span>
+                    </div>
+
+                    <div class="detail-row">
+                        <span class="detail-label">Status</span>
+                        <span>
+                            {% if order.status == 'pending' %}
+                                <span class="status-badge status-pending">Pending</span>
+                            {% elif order.status == 'confirmed' %}
+                                <span class="status-badge status-confirmed">Confirmed</span>
+                            {% elif order.status == 'shipped' %}
+                                <span class="status-badge status-shipped">Shipped</span>
+                            {% elif order.status == 'delivered' %}
+                                <span class="status-badge status-delivered">Delivered</span>
+                            {% elif order.status == 'cancelled' %}
+                                <span class="status-badge status-cancelled">Cancelled</span>
+                            {% endif %}
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: Customer Delivery Details -->
+        <div class="col-lg-6">
+            <div class="card order-card h-100">
+                <div class="card-body p-4">
+
+                    <h5 class="order-card-title mb-4">
+                        <i class="bi bi-person-lines-fill me-2"></i>Customer Delivery Details
+                    </h5>
+
+                    <div class="detail-row">
+                        <span class="detail-label">Customer</span>
+                        <span class="detail-value">{{ order.customer.username }}</span>
+                    </div>
+
+                    <div class="detail-row">
+                        <span class="detail-label">Full Name</span>
+                        <span class="detail-value">
+                            {{ order.delivery_name|default:"No details provided" }}
+                        </span>
+                    </div>
+
+                    <div class="detail-row">
+                        <span class="detail-label">Phone</span>
+                        <span class="detail-value">
+                            {{ order.delivery_phone|default:"No details provided" }}
+                        </span>
+                    </div>
+
+                    <div class="detail-row">
+                        <span class="detail-label">Address</span>
+                        <span class="detail-value">
+                            {{ order.delivery_address|default:"No details provided" }}
+                        </span>
+                    </div>
+
+                    <div class="detail-row">
+                        <span class="detail-label">City</span>
+                        <span class="detail-value">
+                            {{ order.delivery_city|default:"No details provided" }}
+                        </span>
+                    </div>
+
+                    <div class="detail-row">
+                        <span class="detail-label">State</span>
+                        <span class="detail-value">
+                            {{ order.delivery_state|default:"No details provided" }}
+                        </span>
+                    </div>
+
+                    <div class="detail-row">
+                        <span class="detail-label">Pincode</span>
+                        <span class="detail-value">
+                            {{ order.delivery_pincode|default:"No details provided" }}
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Product Preview Card -->
+    <div class="card order-card mt-4">
+        <div class="card-body p-4">
+            <h5 class="order-card-title mb-3">
+                <i class="bi bi-box-seam me-2"></i>Product Preview
+            </h5>
+            <div class="d-flex align-items-center gap-4">
+                {% with order.product.images.first as img %}
+                    {% if img %}
+                        <img src="{{ img.image.url }}" alt="{{ order.product.name }}" class="order-product-img">
+                    {% else %}
+                        <img src="{% static 'images/store/default_product.png' %}" alt="{{ order.product.name }}" class="order-product-img">
+                    {% endif %}
+                {% endwith %}
+                <div>
+                    <h6 class="order-product-name">{{ order.product.name }}</h6>
+                    <p class="order-product-category">{{ order.product.category }}</p>
+                    <p class="order-product-price">₹ {{ order.product.price }} per unit</p>
+                    <a href="/product/{{ order.product.id }}/" class="btn-visit-store">
+                        View Product
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

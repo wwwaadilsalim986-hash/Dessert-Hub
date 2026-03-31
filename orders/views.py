@@ -203,3 +203,8 @@ def delete_review_fn(request, review_id):
     review.delete()
     messages.success(request, 'Review deleted.')
     return redirect(f'/product_detail/{product_id}/')
+
+
+def orderdetailfn(request, id):
+    order = get_object_or_404(Order, id=id)
+    return render(request, 'orders/order_detail.html', {'order': order})

@@ -26,6 +26,7 @@
                     <th>Date</th>
                     <th>Status</th>
                     <th>Update</th>
+                    <th>Details</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,7 +47,13 @@
                     <td>{{ order.customer.username }}</td>
                     <td>{{ order.quantity }}</td>
                     <td><strong>₹ {{ order.total_price }}</strong></td>
-                    <td>{{ order.delivery_city }}, {{ order.delivery_state }}</td>
+                    <td>
+                        {% if order.delivery_city %}
+                            {{ order.delivery_city }}, {{ order.delivery_state }}
+                        {% else %}
+                            <span style="color:#9C7B6B; font-size:0.82rem;">No address provided</span>
+                        {% endif %}
+                    </td>
                     <td>{{ order.created_at|date:"d M Y" }}</td>
                     <td>
                         {% if order.status == 'pending' %}
